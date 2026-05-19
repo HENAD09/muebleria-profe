@@ -10,7 +10,7 @@ builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
 
 // Configuración de PostgreSQL
 var connectionString = builder.Configuration.GetConnectionString("PostgresConnection") 
-    ?? "Host=ep-purple-dream-apgzgg0p.c-7.us-east-1.aws.neon.tech;Database=neondb;Username=neondb_owner;Password=npg_yH6LrDbAZ0cJ;SSL Mode=Require";
+    ?? "Host=ep-purple-dream-apgzgg0p.c-7.us-east-1.aws.neon.tech;Database=neondb;Username=neondb_owner;Password=npg_yH6LrDbAZ0cJ;SSL Mode=Require;Trust Server Certificate=True";
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(connectionString));
 // Add services to the container.
