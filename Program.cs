@@ -32,6 +32,21 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
 
 var app = builder.Build();
 
+// Auto-migrar base de datos al iniciar
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    try
+    {
+        db.Database.Migrate();
+        Console.WriteLine("Migraciones aplicadas correctamente.");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error al migrar BD: {ex.Message}");
+    }
+}
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
