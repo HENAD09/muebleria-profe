@@ -13,6 +13,8 @@ namespace MuebleriaProfe.Models
 
         public string Direccion { get; set; } = string.Empty;
 
+        public string? Referencia { get; set; }
+
         // Útil si quieres darle un límite de crédito a ciertos clientes
         public decimal LimiteCredito { get; set; }
 
