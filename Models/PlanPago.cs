@@ -27,5 +27,10 @@ namespace MuebleriaProfe.Models
 
         [MaxLength(20)]
         public string Estado { get; set; } = "Activo"; // Activo, Atrasado, Pagado
+
+        [MaxLength(20)]
+        public string? TipoPeriodo { get; set; }
+        public int? TotalPeriodos { get; set; }
+        public int? SemanasOfertaContado { get; set; }
     }
 }
