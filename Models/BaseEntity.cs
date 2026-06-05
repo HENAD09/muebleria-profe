@@ -14,6 +14,9 @@ namespace MuebleriaProfe.Models
         // Soft Delete: Si se borra sin internet, se marca como true
         public bool IsDeleted { get; set; } = false;
 
+        // Contador de versión para resolución de conflictos multi-dispositivo (independiente de reloj)
+        public int Version { get; set; } = 0;
+
         // Rastreo de auditoría (Quién hizo el movimiento)
         public Guid? UsuarioUuid { get; set; }
         public string? UsuarioNombre { get; set; }
