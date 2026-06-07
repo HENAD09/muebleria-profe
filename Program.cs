@@ -8,8 +8,14 @@ var builder = WebApplication.CreateBuilder(args);
 var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
 builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
 
-// Configuración de PostgreSQL
-var connectionString = "Host=ep-purple-dream-apgzgg0p.c-7.us-east-1.aws.neon.tech;Database=neondb;Username=neondb_owner;Password=npg_yH6LrDbAZ0cJ;SSL Mode=Require;Trust Server Certificate=True";
+// Configuraciï¿½n de PostgreSQL
+// Prioridad: variable de entorno DATABASE_CONNECTION (Railway) -> fallback a Neon.
+// Durante la migraciï¿½n a Railway, basta con definir/quitar la variable de entorno
+// para alternar entre ambas bases SIN tocar cï¿½digo (rollback instantï¿½neo).
+// TODO: una vez confirmada la migraciï¿½n y dado de baja Neon, eliminar el fallback.
+var connectionString =
+    Environment.GetEnvironmentVariable("DATABASE_CONNECTION")
+    ?? "Host=ep-purple-dream-apgzgg0p.c-7.us-east-1.aws.neon.tech;Database=neondb;Username=neondb_owner;Password=npg_yH6LrDbAZ0cJ;SSL Mode=Require;Trust Server Certificate=True";
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(connectionString));
 // Add services to the container.
